@@ -120,21 +120,21 @@ def relu_back(num1: float, num2: float) -> float:
 
 # Implement for Task 0.3.
 
-def map(f: Callable, list_a: Iterable[float]) -> Iterable:
+def map(f: Callable[[float], float], list_a: Iterable[float]) -> Iterable[float]:
     res = []
     for a in list_a:
         res.append(f(a))
     return res
 
 
-def zipWith(f: Callable, list_a: Iterable[float], list_b: Iterable[float]) -> Iterable:
+def zipWith(f: Callable[[float, float], float], list_a: Iterable[float], list_b: Iterable[float]) -> Iterable[float]:
     res = []
     for (a, b) in zip(list_a, list_b):
         res.append(f(a, b))
     return res
 
 
-def reduce(f: Callable, list_a: Iterable[float]):
+def reduce(f: Callable[[float, float], float], list_a: Iterable[float]):
     # used https://github.com/python/cpython/blob/282bd0fe98bf1c3432fd5a079ecf65f165a52587/Lib/functools.py#L238
     it = iter(list_a)
 
@@ -148,11 +148,11 @@ def reduce(f: Callable, list_a: Iterable[float]):
     return value
 
 
-def negList(list_a: Iterable[float]) -> Iterable:
+def negList(list_a: Iterable[float]) -> Iterable[float]:
     return map(neg, list_a)
 
 
-def addLists(list_a: Iterable[float], list_b: Iterable[float]) -> Iterable:
+def addLists(list_a: Iterable[float], list_b: Iterable[float]) -> Iterable[float]:
     return zipWith(add, list_a, list_b)
 
 
@@ -162,5 +162,5 @@ def sum(list_a: Sequence[float]) -> float:
     return reduce(add, list_a)
 
 
-def prod(list_a: Iterable[float]) -> Iterable:
+def prod(list_a: Iterable[float]) -> Iterable[float]:
     return reduce(mul, list_a)
