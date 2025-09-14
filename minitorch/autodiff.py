@@ -1,5 +1,6 @@
 from dataclasses import dataclass
-from typing import Any, Iterable, List, Tuple
+from typing import Any, Iterable, List, Tuple, Set
+from collections import deque
 
 from typing_extensions import Protocol
 
@@ -72,13 +73,21 @@ def topological_sort(variable: Variable) -> List[Variable]:
         Non-constant Variables in topological order starting from the right.
     """
     # Implement for Task 1.4.
+    top_order = []
+    visited = set()
 
-    top_order = [variable]
+    def dfs(v: Variable) -> None:
+        if v.unique_id in visited or v.is_constant():
+            return
+        visited.add(v.unique_id)
 
-    for parent in variable.parents:
-        top_order.extend(topological_sort(parent))
+        for parent in v.parents:
+            dfs(parent)
 
-    return top_order
+        top_order.append(v)
+
+    dfs(variable)
+    return top_order[::-1]
 
 
 def backpropagate(variable: Variable, deriv: Any) -> None:
@@ -93,16 +102,19 @@ def backpropagate(variable: Variable, deriv: Any) -> None:
     No return. Should write to its results to the derivative values of each leaf through `accumulate_derivative`.
     """
     # Implement for Task 1.4.
-    variable.derivative = deriv
-    chain = variable.chain_rule(d_output=deriv)
-    parents = variable.parents
+    top_order = topological_sort(variable)
+    derivatives = {variable.unique_id: deriv}
 
-    for i, var in enumerate(parents):
-        if var.derivative is None:
-            var.derivative = 0
-        var.derivative += chain[i][1]
-        if not var.is_leaf():
-            var.backward(chain[i][1])
+    for var in top_order:
+        if var.is_leaf():
+            var.accumulate_derivative(derivatives[var.unique_id])
+        else:
+            chain = var.chain_rule(derivatives[var.unique_id])
+            for parent, d_parent in chain:
+                if parent.unique_id in derivatives:
+                    derivatives[parent.unique_id] += d_parent
+                else:
+                    derivatives[parent.unique_id] = d_parent
 
 
 @dataclass
