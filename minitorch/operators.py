@@ -94,7 +94,7 @@ def log_back(num1, num2):
 
 
 def inv_back(num1, num2):
-    return mul(num2, inv(mul(num1, num1)))
+    return neg(mul(num2, inv(mul(num1, num1))))
 
 
 def relu_back(num1, num2):

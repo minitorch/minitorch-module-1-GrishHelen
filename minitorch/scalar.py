@@ -175,6 +175,8 @@ class Scalar:
 
         # Implement for Task 1.3.
         grads = h.last_fn.backward(h.ctx, d_output)
+        if not isinstance(grads, Iterable):
+            grads = [grads]
 
         res = []
         for var, grad in zip(h.inputs, grads):

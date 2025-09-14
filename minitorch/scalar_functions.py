@@ -111,7 +111,7 @@ class Mul(ScalarFunction):
     def backward(ctx: Context, d_output: float) -> Tuple[float, float]:
         # Implement for Task 1.4.
         (a, b,) = ctx.saved_values
-        return operators.mul(a, d_output), operators.mul(b, d_output)
+        return operators.mul(b, d_output), operators.mul(a, d_output)
 
 
 class Inv(ScalarFunction):
@@ -155,8 +155,10 @@ class Sigmoid(ScalarFunction):
 
     @staticmethod
     def backward(ctx: Context, d_output: float) -> float:
-        # TODO: Implement for Task 1.4.
-        raise NotImplementedError("Need to implement for Task 1.4")
+        # Implement for Task 1.4.
+        (a,) = ctx.saved_values
+        sigmoid_val = operators.sigmoid(a)
+        return sigmoid_val * (1 - sigmoid_val) * d_output
 
 
 class ReLU(ScalarFunction):
@@ -186,8 +188,9 @@ class Exp(ScalarFunction):
 
     @staticmethod
     def backward(ctx: Context, d_output: float) -> float:
-        # TODO: Implement for Task 1.4.
-        raise NotImplementedError("Need to implement for Task 1.4")
+        # Implement for Task 1.4.
+        (a,) = ctx.saved_values
+        return operators.exp(a) * d_output
 
 
 class LT(ScalarFunction):
@@ -196,13 +199,12 @@ class LT(ScalarFunction):
     @staticmethod
     def forward(ctx: Context, a: float, b: float) -> float:
         # Implement for Task 1.2.
-        ctx.save_for_backward(a, b)
         return 1.0 if a < b else 0.0
 
     @staticmethod
     def backward(ctx: Context, d_output: float) -> Tuple[float, float]:
-        # TODO: Implement for Task 1.4.
-        raise NotImplementedError("Need to implement for Task 1.4")
+        # Implement for Task 1.4.
+        return 0.0, 0.0
 
 
 class EQ(ScalarFunction):
@@ -211,10 +213,9 @@ class EQ(ScalarFunction):
     @staticmethod
     def forward(ctx: Context, a: float, b: float) -> float:
         # Implement for Task 1.2.
-        ctx.save_for_backward(a, b)
         return 1.0 if operators.eq(a, b) else 0.0
 
     @staticmethod
     def backward(ctx: Context, d_output: float) -> Tuple[float, float]:
-        # TODO: Implement for Task 1.4.
-        raise NotImplementedError("Need to implement for Task 1.4")
+        # Implement for Task 1.4.
+        return 0.0, 0.0
