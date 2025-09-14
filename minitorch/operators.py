@@ -141,7 +141,7 @@ def reduce(f: Callable[[float, float], float], list_a: Iterable[float]) -> float
     try:
         value = next(it)
     except StopIteration:
-        return None
+        return 0.0
 
     for element in it:
         value = f(value, element)
@@ -162,5 +162,5 @@ def sum(list_a: Sequence[float]) -> float:
     return reduce(add, list_a)
 
 
-def prod(list_a: Iterable[float]) -> Iterable[float]:
+def prod(list_a: Iterable[float]) -> float:
     return reduce(mul, list_a)
