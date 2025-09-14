@@ -35,69 +35,69 @@ from typing import Callable, Iterable
 
 # Implement for Task 0.1.
 
-def mul(num1, num2):
+def mul(num1: float, num2: float) -> float:
     return num1 * num2
 
 
-def id(inp):
+def id(inp: float) -> float:
     return inp
 
 
-def add(num1, num2):
+def add(num1: float, num2: float) -> float:
     return num1 + num2
 
 
-def neg(num):
+def neg(num: float) -> float:
     return -num
 
 
-def lt(num1, num2):
+def lt(num1: float, num2: float) -> float:
     return num1 < num2
 
 
-def eq(num1, num2):
+def eq(num1: float, num2: float) -> float:
     return num1 == num2
 
 
-def max(num1, num2):
+def max(num1: float, num2: float) -> float:
     return num2 if lt(num1, num2) else num1
 
 
-def is_close(num1, num2, atol=1e-2):
+def is_close(num1: float, num2: float, atol: float = 1e-2) -> float:
     return abs(num1 - num2) < atol
 
 
-def exp(num):
+def exp(num: float) -> float:
     return math.exp(num)
 
 
-def inv(num):
+def inv(num: float) -> float:
     return 1 / num
 
 
-def sigmoid(num):
+def sigmoid(num: float) -> float:
     if lt(num, 0.0):
         return mul(exp(num), inv(add(1.0, exp(num))))
     return inv(add(1.0, exp(neg(num))))
 
 
-def relu(num):
+def relu(num: float) -> float:
     return max(0.0, num)
 
 
-def log(num):
+def log(num: float) -> float:
     return math.log(num)
 
 
-def log_back(num1, num2):
+def log_back(num1: float, num2: float) -> float:
     return mul(num2, inv(num1))
 
 
-def inv_back(num1, num2):
+def inv_back(num1: float, num2: float) -> float:
     return neg(mul(num2, inv(mul(num1, num1))))
 
 
-def relu_back(num1, num2):
+def relu_back(num1: float, num2: float) -> float:
     derivative = 1.0 if lt(0.0, num1) else 0.0
     return mul(derivative, num2)
 
