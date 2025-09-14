@@ -5,6 +5,7 @@ import pytest
 import minitorch
 from minitorch import Context, ScalarFunction, ScalarHistory
 
+
 # ## Task 1.3 - Tests for the autodifferentiation machinery.
 
 # Simple sanity check and debugging tests.

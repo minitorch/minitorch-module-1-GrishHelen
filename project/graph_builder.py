@@ -17,7 +17,6 @@ def build_expression(code):
 
 
 def build_tensor_expression(code):
-
     variables = {
         "x": minitorch.tensor([[1.0, 2.0, 3.0]], requires_grad=True),
         "y": minitorch.tensor([[1.0, 2.0, 3.0]], requires_grad=True),
@@ -73,7 +72,7 @@ class GraphBuilder:
 
                 for input in cur.history.inputs:
                     if not isinstance(input, minitorch.Scalar) and not isinstance(
-                        input, minitorch.Tensor
+                            input, minitorch.Tensor
                     ):
                         continue
                     queue.append([input])
