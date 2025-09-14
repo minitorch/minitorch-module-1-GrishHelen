@@ -61,7 +61,7 @@ class Variable(Protocol):
         pass
 
 
-def topological_sort(variable: Variable) -> Iterable[Variable]:
+def topological_sort(variable: Variable) -> List[Variable]:
     """
     Computes the topological order of the computation graph.
 
@@ -99,7 +99,7 @@ def backpropagate(variable: Variable, deriv: Any) -> None:
     for var in reversed(top_order):
         d_var = derivatives[var.unique_id]
         if var.is_leaf():
-            var.accumulate_derivative()
+            var.accumulate_derivative(d_var)
         else:
             chain = var.chain_rule(d_var)
             for parent, d_parent in chain:

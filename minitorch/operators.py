@@ -134,7 +134,7 @@ def zipWith(f: Callable[[float, float], float], list_a: Iterable[float], list_b:
     return res
 
 
-def reduce(f: Callable[[float, float], float], list_a: Iterable[float]):
+def reduce(f: Callable[[float, float], float], list_a: Iterable[float]) -> float:
     # used https://github.com/python/cpython/blob/282bd0fe98bf1c3432fd5a079ecf65f165a52587/Lib/functools.py#L238
     it = iter(list_a)
 
