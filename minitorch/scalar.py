@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-from typing import Any, Iterable, Optional, Sequence, Tuple, Type, Union
+from typing import Any, Iterable, Optional, Sequence, Tuple, Type, Union, List
 
 import numpy as np
 
@@ -167,16 +167,22 @@ class Scalar:
         assert self.history is not None
         return self.history.inputs
 
-    def chain_rule(self, d_output: Any) -> Iterable[Tuple[Variable, Any]]:
+    def chain_rule(self, d_output: Any) -> List[Tuple[Variable, Any]]:
         h = self.history
         assert h is not None
         assert h.last_fn is not None
         assert h.ctx is not None
 
         # Implement for Task 1.3.
-        grads = h.last_fn._backward(h.ctx, d_output)
+        grads = h.last_fn.backward(h.ctx, d_output)
+        if not isinstance(grads, Iterable):
+            grads = [grads]
 
-        return zip(h.inputs, grads)
+        res = []
+        for var, grad in zip(h.inputs, grads):
+            res.append((var, grad))
+
+        return res
 
     def backward(self, d_output: Optional[float] = None) -> None:
         """
