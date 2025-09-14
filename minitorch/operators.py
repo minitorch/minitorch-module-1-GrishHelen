@@ -120,14 +120,14 @@ def relu_back(num1: float, num2: float) -> float:
 
 # Implement for Task 0.3.
 
-def map(f: Callable, list_a: Iterable):
+def map(f: Callable, list_a: Iterable) -> Iterable:
     res = []
     for a in list_a:
         res.append(f(a))
     return res
 
 
-def zipWith(f: Callable, list_a: Iterable, list_b: Iterable):
+def zipWith(f: Callable, list_a: Iterable, list_b: Iterable) -> Iterable:
     res = []
     for (a, b) in zip(list_a, list_b):
         res.append(f(a, b))
@@ -148,19 +148,19 @@ def reduce(f: Callable, list_a: Iterable):
     return value
 
 
-def negList(list_a):
+def negList(list_a: Iterable) -> Iterable:
     return map(neg, list_a)
 
 
-def addLists(list_a, list_b):
+def addLists(list_a: Iterable, list_b: Iterable) -> Iterable:
     return zipWith(add, list_a, list_b)
 
 
-def sum(list_a):
+def sum(list_a: Iterable) -> Iterable:
     if len(list_a) == 0:
         return 0
     return reduce(add, list_a)
 
 
-def prod(list_a):
+def prod(list_a: Iterable) -> Iterable:
     return reduce(mul, list_a)
