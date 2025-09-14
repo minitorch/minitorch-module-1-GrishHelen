@@ -93,16 +93,20 @@ def backpropagate(variable: Variable, deriv: Any) -> None:
     No return. Should write to its results to the derivative values of each leaf through `accumulate_derivative`.
     """
     # Implement for Task 1.4.
-    variable.derivative = deriv
-    chain = variable.chain_rule(d_output=deriv)
-    parents = variable.parents
+    top_order = topological_sort(variable)
+    derivatives = {variable.unique_id: deriv}
 
-    for i, var in enumerate(parents):
-        if var.derivative is None:
-            var.derivative = 0
-        var.derivative += chain[i][1]
-        if not var.is_leaf():
-            var.backward(chain[i][1])
+    for var in reversed(top_order):
+        d_var = derivatives[var.unique_id]
+        if var.is_leaf():
+            var.accumulate_derivative()
+        else:
+            chain = var.chain_rule(d_var)
+            for parent, d_parent in chain:
+                if parent.unique_id in derivatives:
+                    derivatives[parent.unique_id] += d_parent
+                else:
+                    derivatives[parent.unique_id] = d_parent
 
 
 @dataclass
