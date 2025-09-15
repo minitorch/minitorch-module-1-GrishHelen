@@ -174,7 +174,7 @@ class Scalar:
         assert h.ctx is not None
 
         # Implement for Task 1.3.
-        grads = h.last_fn.backward(h.ctx, d_output)
+        grads = h.last_fn._backward(h.ctx, d_output)
         if not isinstance(grads, Iterable):
             grads = [grads]
 
