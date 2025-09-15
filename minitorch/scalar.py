@@ -180,8 +180,8 @@ class Scalar:
 
         res = []
         for var, grad in zip(h.inputs, grads):
-            var : Variable = var
-            res.append((var, grad))
+            var_ : Variable = var
+            res.append((var_, grad))
 
         return res
 
