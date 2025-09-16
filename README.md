@@ -51,7 +51,7 @@ Epoch: 100/100, loss: 3.8896420504992513, correct: 50
 
 *Final image*:
 <br>
-> TODO
+<img src="https://github.com/minitorch/minitorch-module-1-GrishHelen/blob/master/img/Simple_trained.png" width="300">
 
 ### Dataset: Diag
 
@@ -84,7 +84,7 @@ Epoch: 100/100, loss: 3.4987644691809012, correct: 49
 
 *Final image*:
 <br>
->TODO
+<img src="https://github.com/minitorch/minitorch-module-1-GrishHelen/blob/master/img/Diag_trained.png" width="300">
 
 ### Dataset: Split
 
@@ -137,7 +137,7 @@ Epoch: 200/200, loss: 6.75629967679229, correct: 48
 
 *Final image*:
 <br>
-> TODO
+<img src="https://github.com/minitorch/minitorch-module-1-GrishHelen/blob/master/img/Split_trained.png" width="300">
 
 ### Dataset: XOR
 
@@ -190,6 +190,6 @@ Epoch: 200/200, loss: 15.929003814020806, correct: 96
 
 *Final image*:
 <br>
-> TODO
+<img src="https://github.com/minitorch/minitorch-module-1-GrishHelen/blob/master/img/XOR_trained.png" width="300">
 
 
