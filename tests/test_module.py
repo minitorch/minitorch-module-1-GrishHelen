@@ -1,9 +1,8 @@
 import pytest
 from hypothesis import given
-
 import minitorch
-
 from .strategies import med_ints, small_floats
+
 
 # # Tests for module.py
 
@@ -44,7 +43,7 @@ class ModuleA4(minitorch.Module):
 
 @pytest.mark.task0_4
 def test_stacked_demo() -> None:
-    "Check that each of the properties match"
+    """Check that each of the properties match"""
     mod = ModuleA1()
     np = dict(mod.named_parameters())
 
@@ -95,7 +94,7 @@ class Module3(minitorch.Module):
 @pytest.mark.task0_4
 @given(med_ints, med_ints)
 def test_module(size_a: int, size_b: int) -> None:
-    "Check the properties of a single module"
+    """Check the properties of a single module"""
     module = Module2()
     module.eval()
     assert not module.training
@@ -116,7 +115,7 @@ def test_module(size_a: int, size_b: int) -> None:
 @pytest.mark.task0_4
 @given(med_ints, med_ints, small_floats)
 def test_stacked_module(size_a: int, size_b: int, val: float) -> None:
-    "Check the properties of a stacked module"
+    """Check the properties of a stacked module"""
     module = Module1(size_a, size_b, val)
     module.eval()
     assert not module.training
